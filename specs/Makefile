@@ -6,16 +6,45 @@ saxparam ?= bootstrapJsUrl='../bower_components/bootstrap/dist/js/bootstrap.min.
 						siteCssUrl='../asset/site.css' \
 						navbar='../../_includes/navbar.html'
 stylesheet := lib/rfcbootstrap.xslt
-
-specs := rfc5789 rfc5861 rfc5988 rfc6265 rfc6585 rfc7230 rfc7231 rfc7232 rfc7233 rfc7234 rfc7235 rfc7236 rfc7237 rfc7538 rfc7540 rfc7541 rfc7615 rfc7616 rfc7617 rfc7639 rfc7725 rfc7838
+specs := $(subst .xml,,$(wildcard rfc*.xml))
 TARGETS := $(addsuffix .html,$(specs))
+Lang := zh-Hans
+FOLDER := $(Lang)
+zhFiles := $(subst rfc,zh,$(specs))
 
-.PHONY: all clean
+.PHONY: all clean zh zhFiles
 
-all: $(TARGETS)
+all: $(TARGETS) zh
 
 clean:
-	rm -f $(TARGETS)
+	@rm -f po/*.mo; \
+	rm -f $(FOLDER)/*; \
+	echo done;
+
+$(zhFiles): zh%: $(FOLDER)/rfc%.html
+
+zh: $(foreach filename,$(specs),$(Lang)/$(filename).html)
 
 %.html: %.xml $(stylesheet)
 	$(saxon) $< $(stylesheet) $(saxparam) > $@
+
+$(FOLDER)/%.html: %-$(Lang).xml $(stylesheet)
+	$(saxon) $< $(stylesheet) $(saxparam) > $@
+
+%-$(Lang).xml: $(FOLDER) po/%.mo %.xml
+	itstool -k -m po/$*.mo $*.xml -o $*-$(Lang).xml
+
+$(FOLDER):
+	mkdir -p $(FOLDER)
+
+po/%.mo: po/%.po
+	msgfmt po/$*.po -o $@
+
+po/%.po: po
+	itstool $*.xml -o $@
+
+$(subst rfc,po,$(specs)): po%: po/rfc%.po
+
+po:
+	mkdir -p po
+
