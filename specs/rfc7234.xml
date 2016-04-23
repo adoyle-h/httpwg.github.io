@@ -72,7 +72,7 @@
 <!--<x:feedback template="mailto:ietf-http-wg@w3.org?subject={docname},%20%22{section}%22&amp;body=&lt;{ref}&gt;:"/>-->
 <front>
 
-  <title abbrev="HTTP/1.1 Caching">Hypertext Transfer Protocol (HTTP/1.1): Caching</title>
+  <title abbrev="HTTP/1.1 Caching">超文本传输协议 (HTTP/1.1)：缓存</title>
 
   <author fullname="Roy T. Fielding" initials="R." role="editor" surname="Fielding">
     <organization abbrev="Adobe">Adobe Systems Incorporated</organization>
@@ -121,10 +121,7 @@
 
 <abstract>
 <t>
-   The Hypertext Transfer Protocol (HTTP) is a stateless application-level protocol for
-   distributed, collaborative, hypertext information systems. This document
-   defines HTTP caches and the associated header fields
-   that control cache behavior or indicate cacheable response messages.
+  超文本传输协议 (HTTP) 是一个无状态的应用层协议，用于分布式、可协作的超文本信息系统。本文档定义了 HTTP 缓存以及相关联的请求头字段，用来控制缓存行为以及指示可缓存的响应信息。
 </t>
 </abstract>
    </front>
@@ -132,10 +129,7 @@
 
 <section anchor="caching" title="Introduction">
 <t>
-   HTTP is typically used for distributed information systems, where
-   performance can be improved by the use of response caches. This document
-   defines aspects of HTTP/1.1 related to caching and reusing response
-   messages.
+  HTTP 主要用在分布式信息系统中，在其中使用响应缓存能够提升系统性能。本文档定义了 HTTP/1.1 中与缓存以及重用响应信息相关的概念
 </t>
 
 <iref item="cache" />
