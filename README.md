@@ -13,22 +13,48 @@
 
 ### 依赖
 
-java 与 [saxon](http://www.saxonica.com/documentation/#!about/gettingstarted/gettingstartedjava)
+- java
+- [itstool](https://github.com/itstool/itstool)，官网 http://itstool.org/
+- [msgfmt](https://www.gnu.org/software/gettext/manual/html_node/msgfmt-Invocation.html)
+- [saxon](http://www.saxonica.com/documentation/#!about/gettingstarted/gettingstartedjava)
+
+### itsool
+用来将 .xml 转成 .po 文件，安装方法看[这里](http://itstool.org/documentation/install)
+
+### msgfmt
+
+用来将 .po 转换成 .mo 文件。
+
+如果你是 mac 用户，可以通过 homebrew 来安装。具体如下
+
+```sh
+brew install gettext
+ln -s /usr/local/opt/gettext/bin/msgfmt /usr/local/bin
+```
+
+#### saxon
 
 安装 saxon，只需要下载最新版 [saxon-HE](https://sourceforge.net/projects/saxon/files/Saxon-HE/) ，解压缩以后，将 `saxon9he.jar` 这个文件拷贝到 `specs/lib/saxon9.jar` 即可。
 
 ### 编译
 
-先切换到 specs 这个目录下 `cd specs`。
+先切换到 specs 这个目录下 `cd specs`。以下命令提供编译功能：
 
-执行 `make` 编译所有文件，或者 `make <文档名>.html` 编译某个文件。
+- `make`: 生成所有英文 HTML 文件和中文 HTML 文件
+- `make clean`: 清除编译后的文件
+- `make zh<文档号>`: 只生成某个文档的中文 HTML 文件。如 `make zh7234`
+- `make zh`: 生成所有中文 HTML 文件
+- `make po/<文件名>.po`: 根据 xml 恢复 po 文件
+- `make po<文档号>`: 别名。作用同 `make po/<文件名>.po`
 
 如果当前已经存在对应的 html，make 操作会认为文件没有改动，会显示`make: Nothing to be done for 'all' `，即不编译文件。
 
 你需要手动删除对应的 html 文件。
 或者执行 `make clean` 删除所有的 .html 文件。
 
-## 版权与协议
+中文 HTML 文件会输出到 `specs/zh-Hans/`
+
+## 版权与协议 (Copyright and License)
 
 源文档版权归遵循源文档的版权协议。
 
