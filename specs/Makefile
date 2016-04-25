@@ -17,15 +17,21 @@ Lang := zh-Hans
 FOLDER := $(Lang)
 zhFiles := $(subst rfc,zh,$(specs))
 
-.PHONY: all clean zh $(zhFiles)
+.PHONY: all clean clean-% zh $(zhFiles)
 
 all: $(TARGETS) zh
 
-clean:
-	@rm -f po/*.mo; \
-	rm -f *-$(Lang).xml; \
-	rm -f $(FOLDER)/*; \
-	echo done;
+clean: clean-xml clean-mo clean-zh-html
+	@echo done
+
+clean-zh-html:
+	@rm -f $(FOLDER)/*
+
+clean-mo:
+	@rm -f po/*.mo
+
+clean-xml:
+	@rm -f *-$(Lang).xml
 
 $(zhFiles): zh%: $(FOLDER)/rfc%.html
 
