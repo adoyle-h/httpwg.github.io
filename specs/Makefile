@@ -23,6 +23,7 @@ all: $(TARGETS) zh
 
 clean:
 	@rm -f po/*.mo; \
+	rm -f *-$(Lang).xml; \
 	rm -f $(FOLDER)/*; \
 	echo done;
 
@@ -46,7 +47,7 @@ po/%.mo: po/%.po
 	msgfmt po/$*.po -o $@
 
 po/%.po: po
-	itstool $*.xml -o $@
+	itstool -k $*.xml -o $@
 
 $(subst rfc,po,$(specs)): po%: po/rfc%.po
 
