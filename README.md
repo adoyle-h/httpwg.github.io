@@ -16,6 +16,10 @@
 ### itsool
 用来将 .xml 转成 .po 文件，安装方法看[这里](http://itstool.org/documentation/install)
 
+安装 itsool 的时候可能会遇到 `configure: error: Python module libxml2 is needed to run this package` 的问题，  
+你需要安装 libxml2。这是一个依赖包，还有 python 版本的加载器。在 mac 下通过 `brew install —with-python libxml2` 安装而不是通过 pip 安装的。  
+安装好以后还需要根据 brew 的提示手动将 libxml2 的 python 包加入到 pip 的 PATH。
+
 ### msgfmt
 
 用来将 .po 转换成 .mo 文件。
