@@ -5,6 +5,11 @@ saxparam ?= bootstrapJsUrl='../bower_components/bootstrap/dist/js/bootstrap.min.
 						jqueryJsUrl='../bower_components/jquery/dist/jquery.min.js' \
 						siteCssUrl='../asset/site.css' \
 						navbar='../../_includes/navbar.html'
+saxparamZH ?= bootstrapJsUrl='../../bower_components/bootstrap/dist/js/bootstrap.min.js' \
+					  bootstrapCssUrl='../../bower_components/bootstrap/dist/css/bootstrap.min.css' \
+						jqueryJsUrl='../../bower_components/jquery/dist/jquery.min.js' \
+						siteCssUrl='../../asset/site.css' \
+						navbar='../../_includes/navbar.html'
 stylesheet := lib/rfcbootstrap.xslt
 specs := $(subst .xml,,$(wildcard rfc*.xml))
 TARGETS := $(addsuffix .html,$(specs))
@@ -12,7 +17,7 @@ Lang := zh-Hans
 FOLDER := $(Lang)
 zhFiles := $(subst rfc,zh,$(specs))
 
-.PHONY: all clean zh zhFiles
+.PHONY: all clean zh $(zhFiles)
 
 all: $(TARGETS) zh
 
@@ -29,7 +34,7 @@ zh: $(foreach filename,$(specs),$(Lang)/$(filename).html)
 	$(saxon) $< $(stylesheet) $(saxparam) > $@
 
 $(FOLDER)/%.html: %-$(Lang).xml $(stylesheet)
-	$(saxon) $< $(stylesheet) $(saxparam) > $@
+	$(saxon) $< $(stylesheet) $(saxparamZH) > $@
 
 %-$(Lang).xml: $(FOLDER) po/%.mo %.xml
 	itstool -k -m po/$*.mo $*.xml -o $*-$(Lang).xml
