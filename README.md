@@ -34,6 +34,8 @@ ln -s /usr/local/opt/gettext/bin/msgfmt /usr/local/bin
 
 ## Quick Start
 
+`git clone` 本项目，并切到 `zh-Hans` 分支上。
+
 ### 目录
 
 - `specs/` 目录存放源文档 (.xml) 和编译后的网页 (.html)。
@@ -44,10 +46,17 @@ ln -s /usr/local/opt/gettext/bin/msgfmt /usr/local/bin
 
 ### 🌰
 
-假设你想翻译 rfc7234。只需要执行 `make po7234`。
-然后你只需翻译对应的 `specs/po/rfc7234.po` 文件即可。
+假设你想翻译 rfc7234。
+
+1. 先 `git checkout -b rfc/7234` 新建分支。
+2. 然后执行 `make po7234`。
+3. 然后你只需翻译对应的 `specs/po/rfc7234.po` 文件即可。
 
 你可以随时编译浏览 html 文件。通过 `make zh7234` 命令会生成 `specs/zh-Hans/rfc7234.html` 文件。用你的浏览器打开这个文件即可。
+
+翻译完成之后，通过提 PR 的方式将该分支合并到 zh-Hans 分支，并指定对应的人来校对你的翻译。
+
+翻译需要遵循翻译规范。
 
 ## 编译
 
