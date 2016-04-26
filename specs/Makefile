@@ -44,7 +44,7 @@ $(FOLDER)/%.html: %-$(Lang).xml $(stylesheet)
 	$(saxon) $< $(stylesheet) $(saxparamZH) > $@
 
 %-$(Lang).xml: $(FOLDER) po/%.mo %.xml
-	itstool -k -m po/$*.mo $*.xml -o $*-$(Lang).xml
+	itstool -m po/$*.mo $*.xml -o $*-$(Lang).xml
 
 $(FOLDER):
 	mkdir -p $(FOLDER)
@@ -53,7 +53,7 @@ po/%.mo:
 	msgfmt po/$*.po -o $@
 
 po/%.po: po
-	itstool -k $*.xml -o $@
+	itstool $*.xml -o $@
 
 $(subst rfc,po,$(specs)): po%: po/rfc%.po
 
