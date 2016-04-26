@@ -49,7 +49,7 @@ $(FOLDER)/%.html: %-$(Lang).xml $(stylesheet)
 $(FOLDER):
 	mkdir -p $(FOLDER)
 
-po/%.mo: po/%.po
+po/%.mo:
 	msgfmt po/$*.po -o $@
 
 po/%.po: po
